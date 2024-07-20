@@ -1,0 +1,3 @@
+artifacts/*
+ingest_old.py
+__pycache__

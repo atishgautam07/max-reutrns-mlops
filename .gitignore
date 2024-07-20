@@ -167,3 +167,4 @@ src/stockSelMLops/ingestion/app.py
 src/stockSelMLops/ingestion/research/*
 src/stockSelMLops/ingestion/artifacts/*
 requirements.txt
+*.DS_Store

@@ -1,7 +1,7 @@
 from google.cloud import storage
 from common import read_yaml, create_directories, create_gcs_directories
 from pathlib import Path
-from config_entity import (DataIngestionConfig)
+from config_entity import (DataIngestionConfig, DataTransformationConfig)
 
 
 class ConfigurationManager:
@@ -43,6 +43,23 @@ class ConfigurationManager:
         )
         return data_ingestion_config
     
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config['data_transformation']
+
+        if config['root_dir'].startswith('gs://'):
+            self.create_gcs_paths(config['root_dir'])
+        else:
+            create_directories([config['root_dir']])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=config['root_dir'],
+            data_path=config['data_path'],
+            transfData=config['TRANSFORM_DATA'],
+            bucketName=self.bucket_name 
+        )
+
+        return data_transformation_config
 
 
     def download_from_gcs(self, gcs_file_path, local_file_path):

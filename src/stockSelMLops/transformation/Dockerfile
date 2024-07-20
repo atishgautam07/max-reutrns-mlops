@@ -8,9 +8,9 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Copy the necessary scripts and configuration files
-COPY ingest.py /app/
+COPY transform.py /app/
 COPY configuration.py /app/
-COPY data_ingestion.py /app/
+COPY data_transformation.py /app/
 COPY config_entity.py /app/
 COPY common.py /app/
 COPY Pipfile.lock /app/
@@ -20,15 +20,19 @@ COPY Pipfile /app/
 RUN pip install -U pip
 RUN pip install pipenv 
 
+RUN apt-get update && apt-get install -y build-essential wget
+RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
+  tar -xvzf ta-lib-0.4.0-src.tar.gz && \
+  cd ta-lib/ && \
+  ./configure --prefix=/usr --build=aarch64-unknown-linux-gnu && \
+  make && \
+  make install
+
 # COPY . /app
 RUN pipenv install --system --deploy 
-
-
-# # Set the environment variable to point to the service account key file
-# COPY your-service-account-key.json /app/your-service-account-key.json
-# ENV GOOGLE_APPLICATION_CREDENTIALS="/app/your-service-account-key.json"
+RUN rm -R ta-lib ta-lib-0.4.0-src.tar.gz
 
 
 # EXPOSE 9696
 # ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "app:app" ]
-ENTRYPOINT ["python", "ingest.py"]
+ENTRYPOINT ["python", "transform.py"]

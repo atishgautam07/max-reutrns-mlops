@@ -1,0 +1,36 @@
+artifacts_root: gs://sma-proj-bucket/pipeline_root/artifacts/
+
+
+data_ingestion:
+  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/data_ingestion
+  source_dir: gs://sma-proj-bucket/pipeline_root/data_artifacts
+  calcTickers: False
+  FETCH_REPO: False
+
+
+data_transformation:
+  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
+  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_ingestion
+  TRANSFORM_DATA: False
+
+
+model_trainer:
+  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/model_trainer
+  num_trials: 5
+  cv: 3
+  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
+  mlflow_uri: "http://34.93.178.179:5000"   #"http://127.0.0.1:5000"   #
+  hpo_exp_rf: "random-forest-hyperParamTune v2"
+  hpo_exp_xgb: "xgBoost-hyperParamTune v2"
+  trainModel: True
+
+
+model_evaluation:
+  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/model_evaluation
+  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
+  top_n: 3
+  ml_uri: "http://34.93.178.179:5000"   #"http://127.0.0.1:5000"   #
+  hpo_exp_rf: "random-forest-hyperParamTune v2"
+  hpo_exp_xgb: "xgBoost-hyperParamTune v2"
+  exp_name: "best-models v2"
+  trainModel: True

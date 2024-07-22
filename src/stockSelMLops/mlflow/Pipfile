@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+google = "*"
+google-auth = "*"
+google-auth-oauthlib = "*"
+google-api-python-client = "*"
+google-cloud-storage = "*"
+gcsfs = "*"
+mlflow = "==2.9.2"
+psycopg2-binary = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.8"

@@ -7,6 +7,7 @@ from mlflow.tracking import MlflowClient
 from sklearn.metrics import  precision_score
 from google.cloud import storage
 from config_entity import (ModelEvaluationConfig)
+import xgboost as xgb
 
 
 
@@ -110,12 +111,27 @@ class ModelEvaluation:
                 mlflow.set_tag("model", "xgb_topN_models")
                 mlflow.log_params(run.data.params)
                 
+                
                 print("Evaluate model on the validation and test sets")
-                val_score = precision_score(self.y_valid, pipeLine.predict(self.X_valid.to_numpy()))
-                mlflow.log_metric("val_score", val_score)
-                test_score = precision_score(self.y_test, pipeLine.predict(self.X_test.to_numpy()))
-                mlflow.log_metric("test_score", test_score)
+                dvalid = xgb.DMatrix(self.X_valid, label=self.y_valid)
+                y_predVal = pipeLine.predict(dvalid)
+                y_pred_binary = (y_predVal > 0.5).astype(int)
+                precision_val = precision_score(self.y_valid, y_pred_binary)
+                mlflow.log_metric("val_score", precision_val)
+
+                dtest = xgb.DMatrix(self.X_test, label=self.y_test)
+                y_predTest = pipeLine.predict(dtest)
+                y_pred_binary = (y_predTest > 0.5).astype(int)
+                precision_test = precision_score(self.y_test, y_pred_binary)
+                mlflow.log_metric("test_score", precision_test)
+                
                 mlflow.xgboost.log_model(pipeLine, artifact_path="model")
+
+                # val_score = precision_score(self.y_valid, pipeLine.predict(self.X_valid.to_numpy()))
+                # mlflow.log_metric("val_score", val_score)
+                # test_score = precision_score(self.y_test, pipeLine.predict(self.X_test.to_numpy()))
+                # mlflow.log_metric("test_score", test_score)
+                # mlflow.xgboost.log_model(pipeLine, artifact_path="model")
 
         print("Selecting the model with the lowest test score")
         experiment = client.get_experiment_by_name(self.config.exp_name)

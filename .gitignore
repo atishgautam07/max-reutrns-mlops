@@ -167,8 +167,9 @@ src/stockSelMLops/ingestion/app.py
 src/stockSelMLops/ingestion/research/*
 src/stockSelMLops/ingestion/artifacts/*
 requirements.txt
-*.DS_Store
-src/stockSelMLops/model_build/mlartifacts/*
-src/stockSelMLops/model_build/mlflow.db
-src/stockSelMLops/model_eval/mlartifacts/*
-src/stockSelMLops/model_eval/mlflow.db
+mlartifacts/*
+*mlartifacts/*
+*mlflow.db
+src/stockSelMLops/mlflow/*
+*config.yaml
+.DS_store

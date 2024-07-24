@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastparquet = "*"
+pandas = "==2.0.3"
+pyarrow = "*"
+pytz = "*"
+pyyaml = "==6.0.1"
+requests = "==2.32.3"
+scikit-learn = "==1.4.2"
+scipy = "==1.13.1"
+tqdm = "==4.66.4"
+python-box = "==6.0.2"
+ensure = "==1.0.2"
+mlflow = "==2.9.2"
+plotly = "*"
+google = "*"
+google-auth = "*"
+google-auth-oauthlib = "*"
+google-api-python-client = "*"
+google-cloud-storage = "*"
+gcsfs = "*"
+xgboost = "==2.0.3"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.8"

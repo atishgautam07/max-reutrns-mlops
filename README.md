@@ -14,19 +14,19 @@ This repository contains an end-to-end MLOps pipeline that predicts the top dail
 
 ## Pipeline Stages
 ### Data Ingestion (data_ingestion.py):
-    - Downloads and processes financial data.
-    - Saves data as Parquet files.
+ - Downloads and processes financial data.
+ - Saves data as Parquet files.
 ### Data Transformation (data_transformation.py):
-    - Adds technical indicators and combines data into a single DataFrame.
+ - Adds technical indicators and combines data into a single DataFrame.
 ### Model Training (model_trainer.py):
-    - Trains Random Forest and XGBoost models.
-    - Uses Hyperopt for hyperparameter optimization.
-    - Logs models and metrics to MLflow.
+ - Trains Random Forest and XGBoost models.
+ - Uses Hyperopt for hyperparameter optimization.
+ - Logs models and metrics to MLflow.
 ### Model Evaluation (model_evaluation.py):
-    - Evaluates models based on precision scores.
-    - Selects and registers the best model with MLflow.
+ - Evaluates models based on precision scores.
+ - Selects and registers the best model with MLflow.
 ### Prediction (model_predict.py):
-    - Uses the registered model for final predictions.
+ - Uses the registered model for final predictions.
 
 ## Usage
  - Clone the repository.

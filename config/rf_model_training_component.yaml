@@ -1,0 +1,17 @@
+name: RF Model Training and hyper param optimizatin
+description: Train a RF and hyper param optimizatin on data from a specified URL and log it to mlflow server.
+inputs:
+  - name: config_path
+    type: String
+    description: The path to the configuration YAML file.
+  - name: bucket_name
+    type: String
+    description: GCS bucket name.
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-rf-model-hpo-gcp:v3
+    command: [
+      "python", "train_rf.py",
+      "--config", {inputValue: config_path},
+      "--bucket", {inputValue: bucket_name}
+    ]

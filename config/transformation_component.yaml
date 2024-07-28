@@ -1,0 +1,17 @@
+name: Data Transformation
+description: Transforms data from a specified URL and saves it to a file.
+inputs:
+  - name: config_path
+    type: String
+    description: The path to the configuration YAML file.
+  - name: bucket_name
+    type: String
+    description: GCS bucket name.
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-data-transform-gcp:v2
+    command: [
+      "python", "transform.py",
+      "--config", {inputValue: config_path},
+      "--bucket", {inputValue: bucket_name}
+    ]

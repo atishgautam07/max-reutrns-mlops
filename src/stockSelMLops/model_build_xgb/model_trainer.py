@@ -54,7 +54,7 @@ class ModelTrainer:
                     dvalid = xgb.DMatrix(X_valid, label=y_valid)
 
                     watchlist = [(dtrain, 'train'), (dvalid, 'valid')]
-                    model = xgb.train(params, dtrain, num_boost_round=int(params['num_boost_round']), 
+                    model = xgb.train(params, dtrain, num_boost_round=1000,
                                     evals=watchlist,
                                     early_stopping_rounds=50,
                                     verbose_eval=False)
@@ -76,7 +76,7 @@ class ModelTrainer:
                     'colsample_bytree': hp.uniform('colsample_bytree', 0.7, 1.0),
                     'eta': hp.loguniform('eta', -3, 0),
                     'learning_rate': hp.uniform('learning_rate', 0.01, 0.3),  # Learning rate
-                    'num_boost_round': hp.quniform('num_boost_round', 75, 1000, 100)  # Number of boosting rounds
+                    # 'num_boost_round': hp.quniform('num_boost_round', 75, 1000, 100)  # Number of boosting rounds
                 }
 
         # Running hyperparameter optimization

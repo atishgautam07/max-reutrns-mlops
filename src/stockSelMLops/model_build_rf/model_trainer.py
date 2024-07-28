@@ -42,7 +42,7 @@ class ModelTrainer:
     
         # Hyperparameter space for RandomForest
         rf_space = {
-            'n_estimators': scope.int(hp.quniform('n_estimators', 50, 1000, 100)),
+            'n_estimators': scope.int(hp.quniform('n_estimators', 50, 300, 75)),
             'max_depth': scope.int(hp.quniform('max_depth', 5, 30, 3)),
             'min_samples_split': scope.int(hp.quniform('min_samples_split', 2, 10, 2)),
             'min_samples_leaf': scope.int(hp.quniform('min_samples_leaf', 1, 5, 1))

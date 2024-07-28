@@ -1,0 +1,17 @@
+name: Model Evaluation and registry
+description: Evaluate model performance on test and register to mlflow server.
+inputs:
+  - name: config_path
+    type: String
+    description: The path to the configuration YAML file.
+  - name: bucket_name
+    type: String
+    description: GCS bucket name.
+implementation:
+  container:
+    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-model-eval-gcp:v1
+    command: [
+      "python", "eval.py",
+      "--config", {inputValue: config_path},
+      "--bucket", {inputValue: bucket_name}
+    ]

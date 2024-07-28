@@ -29,6 +29,7 @@ This repository contains an end-to-end MLOps pipeline that predicts the top dail
  - Uses the registered model for final predictions (top 10 stocks) stored as csv file in /model_preds folder.
 
 ## Usage
+ - Create a Vertex AI workbench instance and postgres db in Google cloud SQL for mlflow.
  - Clone the repository.
  - Set up Google Cloud SDK and authenticate.
  - Configure the config_pred.yaml file with the necessary parameters.

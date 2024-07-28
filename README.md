@@ -54,8 +54,8 @@ This repository contains an end-to-end MLOps pipeline that predicts the top dail
  5. Update compile_pipeline and run_pipeline scripts with gcp project id, bucket name, regio name etc.
  6. Run config_pipeline using vertex AI SDK
     Pipeline is compiled into a JSON format that can be uploaded and executed in Vertex AI.
-    ```
-    bash python config_pipeline.py
+    ```bash
+    python config_pipeline.py
     ```
  7. Upload the compiled pipeline JSON to a Google Cloud Storage bucket.
     ```bash 
@@ -77,10 +77,10 @@ Docker images for each component are built and pushed to Google Artifact Registr
     - Create and Run the Pipeline Job (run_pipeline.py): Use the Vertex AI SDK to create and run the pipeline job.
 
 ## Requirements
-Google Cloud SDK
-Vertex AI
-Kubeflow Pipelines
-Docker
+- Google Cloud SDK
+- Vertex AI
+- Kubeflow Pipelines
+- Docker
 
 ## License
 This project is licensed under the MIT License.

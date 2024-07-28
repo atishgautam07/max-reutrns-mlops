@@ -4,6 +4,16 @@
 ## Overview
 This repository contains an end-to-end MLOps pipeline that predicts the top daily stocks to invest in to optimize a 5-day return. The project leverages various financial data sources, performs data ingestion and transformation, and trains machine learning models using hyperparameter optimization. The final pipeline runs on Vertex AI using kubeflow pipelines, with each component containerized and managed via Google Artifact Registry.
 
+Google cloud services used: Vertex AI workbench, pipelines, PostgreSQL on GCP (for mlflow), Google Cloud Storage.
+List all the components and tools used:
+    - Data Ingestion: Custom scripts, Google Cloud Storage, Docker
+    - Data Transformation: Custom scripts, Google Cloud Storage, Docker
+    - Model Training: Custom scripts, Vertex AI, MLflow, Docker
+    - Model Evaluation: Custom scripts, Vertex AI, MLflow, Docker
+    - Prediction: Custom scripts, Vertex AI, GCS, Docker
+    - Orchestration: Vertex AI Pipelines, Kubeflow
+    - Deployment: Vertex AI, GCS
+    
 ## Repository Structure
  - src: Contains different components of the pipeline.
     - Each folder within src contains a configuration manager class that reads and manages configuration from the config_pred.yaml file.

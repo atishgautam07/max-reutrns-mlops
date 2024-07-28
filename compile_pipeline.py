@@ -10,13 +10,13 @@ PIPELINE_ROOT = f"gs://{BUCKET_NAME}/pipeline_root/"
 
 
 # Load the component from the YAML file
-ingestion_op = load_component_from_file('ingestion_component.yaml')
-transformation_op = load_component_from_file('transformation_component.yaml')
+ingestion_op = load_component_from_file('config/ingestion_component.yaml')
+transformation_op = load_component_from_file('config/transformation_component.yaml')
 # model_training_op = load_component_from_file('model_training_component.yaml')
-rf_model_training_op = load_component_from_file('rf_model_training_component.yaml')
-xgb_model_training_op = load_component_from_file('xgb_model_training_component.yaml')
-model_evaluation_op = load_component_from_file('model_evaluation_component.yaml')
-model_prediction_op = load_component_from_file('model_prediction_component.yaml')
+rf_model_training_op = load_component_from_file('config/rf_model_training_component.yaml')
+xgb_model_training_op = load_component_from_file('config/xgb_model_training_component.yaml')
+model_evaluation_op = load_component_from_file('config/model_evaluation_component.yaml')
+model_prediction_op = load_component_from_file('config/model_prediction_component.yaml')
 
 @dsl.pipeline(
     name='Data Ingestion, Transformation, and Model Training Pipeline',
@@ -43,24 +43,4 @@ def ml_pipeline(config_path: str, bucket_name: str):
     
 
     # Compile the pipeline
-compiler.Compiler().compile(ml_pipeline, 'ml_pipeline.json')
-
-# Initialize the Vertex AI client
-aiplatform.init(project=PROJECT_ID, location=REGION)
-
-
-# @functions_framework.http
-# def trigger_pipeline():
-pipeline_job = aiplatform.PipelineJob(
-    enable_caching=True,
-    display_name='ml_pipeline',
-    template_path='ml_pipeline.json',
-    pipeline_root=PIPELINE_ROOT,
-    parameter_values={
-        'config_path': "gs://sma-proj-bucket/pipeline_root/config_pred.yaml",  #### path to config_pred.yaml file in gcs bucket
-        'bucket_name' : "bucket name"
-    }
-)
-pipeline_job.run()
-
-    # return 'Pipeline triggered successfully', 200
+compiler.Compiler().compile(ml_pipeline, 'config/ml_pipeline.json')

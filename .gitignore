@@ -172,4 +172,5 @@ mlartifacts/*
 *mlflow.db
 src/stockSelMLops/mlflow/*
 *config.yaml
-.DS_store
+*.DS_store
+config/ml_pipeline.json

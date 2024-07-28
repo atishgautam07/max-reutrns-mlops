@@ -9,7 +9,7 @@ inputs:
     description: GCS bucket name.
 implementation:
   container:
-    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-data-ingest-gcp:v2
+    image: <artifact registry>/mlops-data-ingest-gcp:v2
     command: [
       "python", "ingest.py",
       "--config", {inputValue: config_path},

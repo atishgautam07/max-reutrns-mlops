@@ -22,7 +22,7 @@ model_trainer:
   mlflow_uri: "http://34.100.175.83:5000"   #"http://127.0.0.1:5000"   # ## external ip address of the VM
   hpo_exp_rf: "random-forest-hyperParamTune v2"
   hpo_exp_xgb: "xgBoost-hyperParamTune v2"
-  trainModel: True  ## if false dont train, use previously trained models from mlflow
+  trainModel: False  ## if false dont train, use previously trained models from mlflow
 
 
 model_evaluation:

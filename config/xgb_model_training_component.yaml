@@ -9,7 +9,7 @@ inputs:
     description: GCS bucket name.
 implementation:
   container:
-    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-xgb-model-hpo-gcp:v3
+    image: <artifact registry>/mlops-xgb-model-hpo-gcp:v3
     command: [
       "python", "train_xgb.py",
       "--config", {inputValue: config_path},

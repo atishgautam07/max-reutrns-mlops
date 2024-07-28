@@ -9,7 +9,7 @@ inputs:
     description: GCS bucket name.
 implementation:
   container:
-    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-model-pred-gcp:v1
+    image: <artifact registry>/mlops-model-pred-gcp:v1
     command: [
       "python", "predict.py",
       "--config", {inputValue: config_path},

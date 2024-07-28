@@ -9,7 +9,7 @@ inputs:
     description: GCS bucket name.
 implementation:
   container:
-    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-model-eval-gcp:v1
+    image: <artifact registry>/mlops-model-eval-gcp:v1
     command: [
       "python", "eval.py",
       "--config", {inputValue: config_path},

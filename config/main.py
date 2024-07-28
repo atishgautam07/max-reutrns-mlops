@@ -3,9 +3,9 @@ from kfp.dsl import pipeline, component, Artifact, Dataset, Input, Metrics, Mode
 from kfp.components import load_component_from_file
 from google.cloud import aiplatform
 
-PROJECT_ID = "sma-mlops"
-BUCKET_NAME = "sma-proj-bucket"
-REGION = "asia-south1"
+PROJECT_ID = "project name"
+BUCKET_NAME = "bucket name"
+REGION = "region name"
 PIPELINE_ROOT = f"gs://{BUCKET_NAME}/pipeline_root/"
 
 
@@ -57,8 +57,8 @@ pipeline_job = aiplatform.PipelineJob(
     template_path='ml_pipeline.json',
     pipeline_root=PIPELINE_ROOT,
     parameter_values={
-        'config_path': "gs://sma-proj-bucket/pipeline_root/config_pred.yaml",
-        'bucket_name' : "sma-proj-bucket"
+        'config_path': "gs://sma-proj-bucket/pipeline_root/config_pred.yaml",  #### path to config_pred.yaml file in gcs bucket
+        'bucket_name' : "bucket name"
     }
 )
 pipeline_job.run()

@@ -26,7 +26,7 @@ This repository contains an end-to-end MLOps pipeline that predicts the top dail
  - Evaluates models based on precision scores.
  - Selects and registers the best model with MLflow.
 ### Prediction (model_predict.py):
- - Uses the registered model for final predictions.
+ - Uses the registered model for final predictions (top 10 stocks) stored as csv file in /model_preds folder.
 
 ## Usage
  - Clone the repository.
@@ -40,7 +40,6 @@ This repository contains an end-to-end MLOps pipeline that predicts the top dail
  2. For individual folders within src:
     - build and push docker image
     ```bash
-    .
     docker build -t your-region-docker.pkg.dev/your-project-id/pipeline_stage:latest .
     docker push your-region-docker.pkg.dev/your-project-id/pipeline_stage:latest
     ```

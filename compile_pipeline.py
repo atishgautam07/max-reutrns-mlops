@@ -3,9 +3,9 @@ from kfp.dsl import pipeline, component, Artifact, Dataset, Input, Metrics, Mode
 from kfp.components import load_component_from_file
 from google.cloud import aiplatform
 
-PROJECT_ID = "project name"
-BUCKET_NAME = "bucket name"
-REGION = "region name"
+PROJECT_ID = "sma-mlops"
+BUCKET_NAME = "sma-proj-bucket"
+REGION = "asia-south1"
 PIPELINE_ROOT = f"gs://{BUCKET_NAME}/pipeline_root/"
 
 
@@ -17,9 +17,10 @@ rf_model_training_op = load_component_from_file('config/rf_model_training_compon
 xgb_model_training_op = load_component_from_file('config/xgb_model_training_component.yaml')
 model_evaluation_op = load_component_from_file('config/model_evaluation_component.yaml')
 model_prediction_op = load_component_from_file('config/model_prediction_component.yaml')
+model_monitoring_op = load_component_from_file('config/model_monitoring_component.yaml')
 
 @dsl.pipeline(
-    name='Data Ingestion, Transformation, and Model Training Pipeline',
+    name='Data Ingestion, Transformation, and Model Training, Eval, Predict Pipeline',
     description='A pipeline that performs data ingestion, transformation, and model training with hyperparameter optimization.'
 )
 def ml_pipeline(config_path: str, bucket_name: str):
@@ -40,7 +41,8 @@ def ml_pipeline(config_path: str, bucket_name: str):
     model_evaluation_step = model_evaluation_op(config_path=config_path, bucket_name=bucket_name).after(rf_model_training_step)
     # Model prediction step, runs after evaluation
     model_prediction_step = model_prediction_op(config_path=config_path, bucket_name=bucket_name).after(model_evaluation_step)
-    
+    # Model monitoring step, runs after prediction
+    model_monitoring_step = model_monitoring_op(config_path=config_path, bucket_name=bucket_name).after(model_prediction_step)
 
     # Compile the pipeline
 compiler.Compiler().compile(ml_pipeline, 'config/ml_pipeline.json')

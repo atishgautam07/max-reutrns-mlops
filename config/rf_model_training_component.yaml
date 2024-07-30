@@ -9,7 +9,7 @@ inputs:
     description: GCS bucket name.
 implementation:
   container:
-    image: <artifact registry>/mlops-rf-model-hpo-gcp:v3
+    image: asia-south1-docker.pkg.dev/sma-mlops/mlops-proj-1/mlops-rf-model-hpo-gcp:v3
     command: [
       "python", "train_rf.py",
       "--config", {inputValue: config_path},

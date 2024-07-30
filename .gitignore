@@ -174,3 +174,4 @@ src/stockSelMLops/mlflow/*
 *config.yaml
 *.DS_store
 config/ml_pipeline.json
+config/*

@@ -174,4 +174,7 @@ src/stockSelMLops/mlflow/*
 *config.yaml
 *.DS_store
 config/ml_pipeline.json
-config/*
+config_copy/*
+compile_pipeline_copy.py
+config_pred_copy.yaml
+run_pipeline_copy.py

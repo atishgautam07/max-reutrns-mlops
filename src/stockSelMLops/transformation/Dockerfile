@@ -33,6 +33,4 @@ RUN pipenv install --system --deploy
 RUN rm -R ta-lib ta-lib-0.4.0-src.tar.gz
 
 
-# EXPOSE 9696
-# ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "app:app" ]
 ENTRYPOINT ["python", "transform.py"]

@@ -1,5 +1,5 @@
-name: XGB Model Training and hyper param optimizatin
-description: Train a XGB and hyper param optimizatin on data from a specified URL and log it to mlflow server.
+name: ModelMonitoringComponent
+description: A component to monitor data and model drift using Evidently AI and write metrics to PostgreSQL.
 inputs:
   - name: config_path
     type: String
@@ -9,9 +9,9 @@ inputs:
     description: GCS bucket name.
 implementation:
   container:
-    image: <region-project-artifact>/mlops-xgb-model-hpo-gcp:v3
+    image: <region-project-artifact>/mlops-model-monitor-gcp:v2
     command: [
-      "python", "train_xgb.py",
+      "python", "monitor.py",
       "--config", {inputValue: config_path},
       "--bucket", {inputValue: bucket_name}
     ]

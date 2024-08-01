@@ -68,6 +68,10 @@ class ModelMonitoringConfig:
     model_name_xgb: str
     model_name_rf: str
     prediction_name: str
-    DB_URI: str
+    # DB_URI: str
+    INSTANCE_CONNECTION_NAME: str
+    DB_USER: str
+    DB_PASS: str
+    DB_NAME: str
     TABLE_NAME: str
     bucketName: str

@@ -15,8 +15,6 @@ COPY config_entity.py /app/
 COPY common.py /app/
 COPY Pipfile.lock /app/
 COPY Pipfile /app/
-COPY config.py /app/
-COPY config_pred.yaml /app/
 
 
 RUN pip install pipenv && \

@@ -3,9 +3,9 @@ from kfp.dsl import pipeline, component, Artifact, Dataset, Input, Metrics, Mode
 from kfp.components import load_component_from_file
 from google.cloud import aiplatform
 
-PROJECT_ID = "sma-mlops"
-BUCKET_NAME = "sma-proj-bucket"
-REGION = "asia-south1"
+PROJECT_ID = "<project-id>"
+BUCKET_NAME = "<bucket-name>"
+REGION = "<region-name>"
 PIPELINE_ROOT = f"gs://{BUCKET_NAME}/pipeline_root/"
 
 

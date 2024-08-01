@@ -20,6 +20,11 @@ xgboost = "==2.0.3"
 evidently = "*"
 psycopg-binary = "*"
 psycopg2-binary = "*"
+pandas = "==2.0.3"
+scikit-learn = "==1.4.2"
+scipy = "==1.13.1"
+cloud-sql-python-connector = "*"
+pg8000 = "*"
 
 [dev-packages]
 

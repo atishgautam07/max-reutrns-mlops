@@ -148,7 +148,11 @@ class ConfigurationManager:
             model_name_xgb=config["model_name_xgb"],
             model_name_rf=config["model_name_rf"],
             prediction_name=config["prediction_name"],
-            DB_URI=config["DB_URI"],
+            # DB_URI=config["DB_URI"],
+            INSTANCE_CONNECTION_NAME=config["INSTANCE_CONNECTION_NAME"],
+            DB_USER=config["DB_USER"],
+            DB_PASS=config["DB_PASS"],
+            DB_NAME=config["DB_NAME"],
             TABLE_NAME=config["TABLE_NAME"],
             bucketName=self.bucket_name
         )

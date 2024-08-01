@@ -7,9 +7,9 @@ import mlflow
 from evidently.report import Report
 from evidently.metrics import ColumnDriftMetric, DatasetDriftMetric, DatasetMissingValuesMetric
 from sqlalchemy import create_engine
+from google.cloud.sql.connector import Connector
 from google.cloud import storage
 from config_entity import (ModelMonitoringConfig)
-import config
 
 class ModelMonitoring:
     def __init__(self, config: ModelMonitoringConfig):
@@ -142,6 +142,25 @@ class ModelMonitoring:
         ref_data = self.df_full[self.df_full.split.isin(['train','validation'])].copy(deep=True) #pd.concat([self.X_train_valid, self.y_train_valid])
         curr_data = self.df_full[self.df_full.split.isin(['test'])].copy(deep=True)  #pd.concat([self.X_test, self.y_test])
 
+        # initialize Connector object
+        connector = Connector()
+
+        # function to return the database connection object
+        def getconn():
+            conn = connector.connect(
+                self.config.INSTANCE_CONNECTION_NAME,
+                "pg8000",
+                user=self.config.DB_USER,
+                password=self.config.DB_PASS,
+                db=self.config.DB_NAME
+            )
+            return conn
+
+        # create connection pool with 'creator' argument to our connection object function
+        engine = create_engine(
+            "postgresql+pg8000://",
+            creator=getconn,
+        )
         print ("Updating sql table with drift metrics.")
         for i in range(1, 30):
             # drift_df = pd.DataFrame([self.run_monitoring(i, ref_data, curr_data[(curr_data.Date >= (self.begin + datetime.timedelta(i))) &
@@ -150,7 +169,7 @@ class ModelMonitoring:
                                                                                 (curr_data.Date < (self.begin + datetime.timedelta(i + 1)))])])
             
             
-            engine = create_engine(self.config.DB_URI)
+            # engine = create_engine(self.config.DB_URI)
             dftmp = pd.read_sql(f"select * from {self.config.TABLE_NAME};", engine)
             dftmp = pd.concat([dftmp, drift_df])
             #send data back to sql

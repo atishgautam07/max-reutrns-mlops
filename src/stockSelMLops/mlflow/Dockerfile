@@ -21,4 +21,4 @@ RUN pipenv install --system --deploy
 EXPOSE 5000
 
 # Run the MLflow server
-CMD mlflow server --backend-store-uri postgresql://postgres:mlflowsma@10.2.80.3:5432/mlflow_v1 --default-artifact-root gs://sma-proj-bucket/pipeline_root/mlflow/ --host 0.0.0.0 --port 5000
+CMD mlflow server --backend-store-uri <> --default-artifact-root <> --host 0.0.0.0 --port 5000

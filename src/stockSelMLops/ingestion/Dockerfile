@@ -23,12 +23,4 @@ RUN pip install pipenv
 # COPY . /app
 RUN pipenv install --system --deploy 
 
-
-# # Set the environment variable to point to the service account key file
-# COPY your-service-account-key.json /app/your-service-account-key.json
-# ENV GOOGLE_APPLICATION_CREDENTIALS="/app/your-service-account-key.json"
-
-
-# EXPOSE 9696
-# ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "app:app" ]
 ENTRYPOINT ["python", "ingest.py"]

@@ -1,35 +1,35 @@
-artifacts_root: gs://sma-proj-bucket/pipeline_root/artifacts/
+artifacts_root: gs://<bucket-name>/pipeline_root/artifacts/
 
 
 data_ingestion:
-  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/data_ingestion
-  source_dir: gs://sma-proj-bucket/pipeline_root/data_artifacts
+  root_dir: gs://<bucket-name>/pipeline_root/artifacts/data_ingestion
+  source_dir: gs://<bucket-name>/pipeline_root/data_artifacts
   calcTickers: False  ## if true calulate list of NSE stocks based on company financials filters
   FETCH_REPO: True  ## if false fetch data from data_ingestion folder
 
 
 data_transformation:
-  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
-  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_ingestion
+  root_dir: gs://<bucket-name>/pipeline_root/artifacts/data_transformation
+  data_path: gs://<bucket-name>/pipeline_root/artifacts/data_ingestion
   TRANSFORM_DATA: True ## if false fetch data from data_transormation folder
 
 
 model_trainer:
-  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/model_trainer
-  num_trials: 3  ## number of trials for hyperopt
+  root_dir: gs://<bucket-name>/pipeline_root/artifacts/model_trainer
+  num_trials: 5  ## number of trials for hyperopt
   cv: 2   ## cv count
-  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
-  mlflow_uri: "http://35.244.36.70:5000"   #"http://127.0.0.1:5000"   #"http://34.100.175.83:5000"   # ## external ip address of the VM
+  data_path: gs://<bucket-name>/pipeline_root/artifacts/data_transformation
+  mlflow_uri: "http://<external ip address VM>:5000"   #"http://127.0.0.1:5000"    ## external ip address of the VM
   hpo_exp_rf: "random-forest-hyperParamTune v2"
   hpo_exp_xgb: "xgBoost-hyperParamTune v2"
-  trainModel: False  ## if false dont train, use previously trained models from mlflow
+  trainModel: True  ## if false dont train, use previously trained models from mlflow
 
 
 model_evaluation:
-  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/model_evaluation
-  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
-  top_n: 2        ## top n models based on train score which are further evaluated based on test and val scores
-  ml_uri: "http://35.244.36.70:5000"   #"http://127.0.0.1:5000"   #"http://34.100.175.83:5000"   #  ## external ip address of the VM
+  root_dir: gs://<bucket-name>/pipeline_root/artifacts/model_evaluation
+  data_path: gs://<bucket-name>/pipeline_root/artifacts/data_transformation
+  top_n: 3        ## top n models based on train score which are further evaluated based on test and val scores
+  ml_uri: "http://<external ip address VM>:5000"   #"http://127.0.0.1:5000"     ## external ip address of the VM
   hpo_exp_rf: "random-forest-hyperParamTune v2"
   hpo_exp_xgb: "xgBoost-hyperParamTune v2"
   exp_name: "best-models v2"
@@ -37,9 +37,9 @@ model_evaluation:
 
 
 model_prediction:
-  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/model_preds
-  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
-  ml_uri: "http://35.244.36.70:5000"   #"http://127.0.0.1:5000"   #http://34.100.175.83:5000"   #  ## external ip address of the VM
+  root_dir: gs://<bucket-name>/pipeline_root/artifacts/model_preds
+  data_path: gs://<bucket-name>/pipeline_root/artifacts/data_transformation
+  ml_uri: "http://<external ip address VM>:5000"   #"http://127.0.0.1:5000"   ## external ip address of the VM
   hpo_exp_rf: "random-forest-hyperParamTune v2"
   hpo_exp_xgb: "xgBoost-hyperParamTune v2"
   exp_name: "best-models v2"
@@ -49,12 +49,15 @@ model_prediction:
 
 
 model_monitoring:
-  root_dir: gs://sma-proj-bucket/pipeline_root/artifacts/model_monitor
-  data_path: gs://sma-proj-bucket/pipeline_root/artifacts/data_transformation
-  ml_uri: "http://35.244.36.70:5000"   #"http://127.0.0.1:5000"   #  ## external ip address of the VM
+  root_dir: gs://<bucket-name>/pipeline_root/artifacts/model_monitor
+  data_path: gs://<bucket-name>/pipeline_root/artifacts/data_transformation
+  ml_uri: "http://<external ip address VM>:5000"   #"http://127.0.0.1:5000"   #  ## external ip address of the VM
   exp_name: "best-models v2"
   model_name_xgb: "best-model-xgb"
   model_name_rf: "best-model-rf"
   prediction_name: "pred_xgp_rf_best"
-  DB_URI: "postgresql://postgres:mlflowsma@10.2.80.3:5432/evidai_v1"
-  TABLE_NAME: "evidently_metrics"
+  INSTANCE_CONNECTION_NAME: "<project-id>:<region-name>:<db name>"
+  DB_USER: "DB_USER"
+  DB_PASS: "DB_PASS"
+  DB_NAME: "DB_NAME"
+  TABLE_NAME: "TABLE_NAME"

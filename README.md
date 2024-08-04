@@ -2,7 +2,7 @@
 ### End-to-End MLOps project for predicting top daily stocks to invest in to optimize 5-day return.
 
 ## Overview
-This repository contains an end-to-end MLOps pipeline designed to predict the top daily stocks to invest in, with the goal of optimizing a 5-day return. The project leverages various financial data sources to perform data ingestion and transformation, and it trains machine learning models, optimizes hyperparameters and predicts using an ensemble approach. The final pipeline runs on Vertex AI using Kubeflow Pipelines, with each component containerized and managed via Google Artifact Registry.
+This repository contains an end-to-end MLOps pipeline designed to predict the top daily stocks (NSE) to invest in, with the goal of optimizing a 5-day return. The project leverages various financial data sources to perform data ingestion and transformation, and it trains machine learning models, optimizes hyperparameters and predicts using an ensemble approach. The final pipeline runs on Vertex AI using Kubeflow Pipelines, with each component containerized and managed via Google Artifact Registry.
 ### Features
  1. Data Sources: Daily indexes, commodities, forex data from yfinance, FRED, TA-Lib, and pandas_datareader.
  2. Technical Indicators: Majority of momentum, volatility, and pattern indicators.
@@ -78,7 +78,7 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
  - Applies stock selection criteria based on technical indicators and predictions.
  - Simulates a trading strategy and calculates investment returns.
  - Evaluates the strategy performance using metrics like total return, CAGR, and Sharpe ratio.
- - Parameters and Resutls of tested strategy:
+ - Parameters and Resutls of tested strategy (tested/simulated on test set starting March 2020):
    ![Strategy performance](images/strategy_perf_2.png)
    ![Parameters of trading strategy](images/strat_params.png)
 

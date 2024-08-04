@@ -76,7 +76,10 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
 ### Simulating Strategies (simulate_strategy.py)
  - Calculates financial indicators such as moving averages, RSI, and volatility.
  - Applies stock selection criteria based on technical indicators and predictions.
- - Simulates a trading strategy and calculates investment returns.
+ - Selection criteria for tested strategy in screenshot below:- RSI < 60, predicted probability > 0.52, top 7 stocks with LTP > 20
+ - Weighting criteria:- combining predicted probability and last 30 day volatility of stock. This is to ensure we allocate higher sum to high confidence and low volatility stocks (to reduce risk)
+ - Initial amount invested on the first day is only used to reinvest for following days.
+ - Simulate the trading strategy and calculates investment returns.
  - Evaluates the strategy performance using metrics like total return, CAGR, and Sharpe ratio.
  - Parameters and Resutls of tested strategy (tested/simulated on test set starting March 2020):
    ![Strategy performance](images/strategy_perf_2.png)

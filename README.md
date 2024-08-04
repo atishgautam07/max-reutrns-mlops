@@ -3,6 +3,11 @@
 
 ## Overview
 This repository contains an end-to-end MLOps pipeline designed to predict the top daily stocks to invest in, with the goal of optimizing a 5-day return. The project leverages various financial data sources to perform data ingestion and transformation, and it trains machine learning models, optimizes hyperparameters and predicts using an ensemble approach. The final pipeline runs on Vertex AI using Kubeflow Pipelines, with each component containerized and managed via Google Artifact Registry.
+### Features
+ 1. Data Sources: Daily indexes, commodities, forex data from yfinance, FRED, TA-Lib, and pandas_datareader.
+ 2. Technical Indicators: Majority of momentum, volatility, and pattern indicators.
+ 3. Machine Learning Models: Random Forest and XGBoost models.
+ 4. Pipeline Stages: Data ingestion, transformation, model training, evaluation, monitoring and simulation.
 
 ### Google Cloud Services Used:
 - Vertex AI Workbench: For development and experimentation.
@@ -29,11 +34,6 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
     - compile_pipeline.py: Compiles all hte components of the pipeline. 
     - run_pipeline.py: Runs the final end-to-end pipeline.
 
-## Features
-1. Data Sources: Daily indexes, commodities, forex data using yfinance, FRED, TA-Lib, and pandas_datareader.
-2. Technical Indicators: Majority of momentum, volatility, and pattern indicators.
-3. Machine Learning Models: Random Forest and XGBoost models.
-4. Pipeline Stages: Data ingestion, transformation, model training, and evaluation.
 
 ## Pipeline Stages
 ### Data Ingestion (data_ingestion.py):

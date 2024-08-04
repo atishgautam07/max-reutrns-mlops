@@ -31,17 +31,36 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
 
 ## Pipeline Stages
 ### Data Ingestion (data_ingestion.py):
- - Downloads and processes financial data.
- - Saves data as Parquet files.
+   The data_ingestion.py script ingests, processes, and saves financial data. Here's a compact overview of its functionality:
+   1. download_data(self):
+      - Downloads daily data for:
+      - S&P 500 (^GSPC), Dow Jones (^DJI), Volatility Index (VIX) (^VIX)
+      - NSE, BSE, NSE commodity index etc.
+      - Gold, crude oil, brent oi, nautral gas, copper, aluminium. coal etc.
+      - bitcoin, ethereum, xrp etc.
+      - USD, GBP, EUR, JPY, AUD etc.
+   2. getIndiaStocks(self):
+   - filter list of India NSE ticker based on market cap, earnings growth, operating profit margin, cashflow, ROE, debt.
+   3. process_data(self):
+   - Merges downloaded data on date.
+   - Forward-fills missing values in specific fields.
+   persist(self):
+   - Saves data to local directory as Parquet files (tickers_df.parquet, indexes_df.parquet, macro_df.parquet).
 ### Data Transformation (data_transformation.py):
  - Adds technical indicators and combines data into a single DataFrame. Transformed data ready for model training.
+ - Initialization: Initializes with configuration parameters and reads ingested data.
+ - Feature Engineering: Adds various technical indicators, macroeconomic variables, and custom numerical features.
+ - Technical Indicators: Utilizes TA-Lib to compute a wide range of technical indicators.
+ - Data Processing: Merges different data sources, handles missing values, and prepares the final DataFrame.
+ - Saving Processed Data: Saves the transformed data for use in model training.
 ### Model Training (model_trainer.py):
  - Trains Random Forest and XGBoost models.
  - Uses Hyperopt for hyperparameter optimization.
  - Logs models and metrics to MLflow.
 ### Model Evaluation (model_evaluation.py):
- - Evaluates models based on precision scores.
- - Selects and registers the best model with MLflow.
+ - Calls model_evaluation.py.
+ - Reads logged models for the best validation precision score.
+ - Selects the best model using the test set precision score and registers it with MLflow.
 ### Prediction (model_predict.py):
  - Uses the registered model for final predictions (mean of predicted probability of best rf and xgb models).
  - Stores top 10 stock predictions as a CSV file in the /model_preds folder.
@@ -49,9 +68,14 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
  - Uses evidently ai to calculate drift and other metrics on target/prediction columns.
  - Logs metrics to PostgreSQL on Google Cloud, which are visualized using custom Grafana dashboards.
 ### Simulating Strategies (simulate_strategy.py)
- - Calculates various financial indicators, applies stock selection criteria, and evaluates the performance of a trading strategy.
+ - Calculates financial indicators such as moving averages, RSI, and volatility.
+ - Applies stock selection criteria based on technical indicators and predictions.
+ - Simulates a trading strategy and calculates investment returns.
+ - Evaluates the strategy performance using metrics like total return, CAGR, and Sharpe ratio.
+ - Parameters and Resutls of tested strategy:
+   ![Strategy performance](images/strategy_perf_2.png)
+   ![Parameters of trading strategy](images/strat_params.png)
 
-![Pipeline Snapshot](images/Pipeline_Snapshot.png)
 
 ## Usage
 1. Setup Environment:
@@ -92,6 +116,7 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
    - Monitor MLflow experiments at the URL specified in config_pred.yaml (port 5000).
    - Visualize model metrics on the Grafana dashboard at the URL specified in config_pred.yaml (port 3000). Evidently dashboards are logged and can also be viewed from MLflow ui. 
 
+![Pipeline Snapshot](images/Pipeline_Snapshot.png)
 
 ## Deployment
 Docker images for each component are built and pushed to Google Artifact Registry. These images are then used as components in the Vertex AI pipeline.
@@ -109,6 +134,7 @@ Docker images for each component are built and pushed to Google Artifact Registr
 - MLflow
 - Evidently AI
 - Grafana
+- yfinance, FRED, TA-Lib. pandas_datareader
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.

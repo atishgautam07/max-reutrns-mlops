@@ -61,3 +61,16 @@ model_monitoring:
   DB_PASS: "DB_PASS"
   DB_NAME: "DB_NAME"
   TABLE_NAME: "TABLE_NAME"
+
+
+simulate_strategy:
+  root_dir: gs://<bucket-name>/pipeline_root/artifacts/simulate_strategy
+  data_path: gs://<bucket-name>/pipeline_root/artifacts/model_preds
+  rsi: 60
+  prob_thres: 0.52
+  LE1: 0.1
+  LE2: 0.005
+  SL: 0.001
+  PP: 0.025
+  window: 5
+  starting_corpus: 1000000

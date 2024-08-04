@@ -1,0 +1,17 @@
+name: Simulate Strategies
+description: A component to simulate strategis and calculate returns.
+inputs:
+  - name: config_path
+    type: String
+    description: The path to the configuration YAML file.
+  - name: bucket_name
+    type: String
+    description: GCS bucket name.
+implementation:
+  container:
+    image: <region-project-artifact>/mlops-simulate-strategy-gcp:v1
+    command: [
+      "python", "simulate.py",
+      "--config", {inputValue: config_path},
+      "--bucket", {inputValue: bucket_name}
+    ]

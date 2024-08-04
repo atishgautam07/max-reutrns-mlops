@@ -1,0 +1,35 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "==2.0.3"
+numpy = "==1.26.4"
+ta-lib = "*"
+flask = "*"
+flask-cors = "*"
+boto3 = "*"
+pyarrow = "*"
+pytz = "*"
+pyyaml = "==6.0.1"
+requests = "==2.32.3"
+tqdm = "==4.66.4"
+python-box = "==6.0.2"
+ensure = "==1.0.2"
+plotly = "*"
+seaborn = "*"
+google = "*"
+google-auth = "*"
+google-auth-oauthlib = "*"
+google-api-python-client = "*"
+google-cloud-storage = "*"
+gcsfs = "*"
+joblib = "==1.4.2"
+yfinance = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.8"

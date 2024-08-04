@@ -48,6 +48,8 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
 ### Moitoring (model_monintor.py):
  - Uses evidently ai to calculate drift and other metrics on target/prediction columns.
  - Logs metrics to PostgreSQL on Google Cloud, which are visualized using custom Grafana dashboards.
+### Simulating Strategies (simulate_strategy.py)
+ - Calculates various financial indicators, applies stock selection criteria, and evaluates the performance of a trading strategy.
 
 ## Usage
 1. Setup Environment:
@@ -105,6 +107,9 @@ Docker images for each component are built and pushed to Google Artifact Registr
 - MLflow
 - Evidently AI
 - Grafana
+
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
 
 ## License
 This project is licensed under the MIT License.

@@ -52,6 +52,10 @@ class PredictionPipeline:
         # define rank of the prediction
         self.df_full[f"{self.config.prediction_name}_rank"] = self.df_full.groupby("Date")[self.config.prediction_name].rank(method="first", ascending=False)
 
+        self.df_full[['Date','Ticker','Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume',
+                                          'growth_future_5d', 'is_positive_growth_5d_future','split', 
+                                          'pred_xgp_rf_best', 'pred_xgp_rf_best_rank']].to_csv(self.config.root_dir + "/df_pred_forSim.csv")
+
         COLUMNS = ['Ticker', 'Adj Close','Date',self.config.prediction_name, self.config.prediction_name+'_rank']
         result_df = self.df_full[(self.df_full[f'{self.config.prediction_name}_rank']<=10) & 
                                     (self.df_full['Date'] == self.df_full['Date'].max())].sort_values(by=self.config.prediction_name)[COLUMNS]

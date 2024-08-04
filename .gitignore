@@ -167,6 +167,7 @@ src/stockSelMLops/ingestion/app.py
 src/stockSelMLops/ingestion/research/*
 src/stockSelMLops/ingestion/artifacts/*
 requirements.txt
+artifacts/*
 mlartifacts/*
 *mlartifacts/*
 *mlflow.db

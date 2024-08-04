@@ -18,6 +18,8 @@ xgb_model_training_op = load_component_from_file('config/xgb_model_training_comp
 model_evaluation_op = load_component_from_file('config/model_evaluation_component.yaml')
 model_prediction_op = load_component_from_file('config/model_prediction_component.yaml')
 model_monitoring_op = load_component_from_file('config/model_monitoring_component.yaml')
+simulate_strategy_op = load_component_from_file('config_copy/simulate_strategy_component.yaml')
+
 
 @dsl.pipeline(
     name='Data Ingestion, Transformation, and Model Training, Eval, Predict Pipeline',
@@ -43,6 +45,9 @@ def ml_pipeline(config_path: str, bucket_name: str):
     model_prediction_step = model_prediction_op(config_path=config_path, bucket_name=bucket_name).after(model_evaluation_step)
     # Model monitoring step, runs after prediction
     model_monitoring_step = model_monitoring_op(config_path=config_path, bucket_name=bucket_name).after(model_prediction_step)
+    # Simulate strategy
+    simulate_strategy_step = simulate_strategy_op(config_path=config_path, bucket_name=bucket_name).after(model_prediction_step)
+
 
     # Compile the pipeline
 compiler.Compiler().compile(ml_pipeline, 'config/ml_pipeline.json')

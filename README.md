@@ -51,6 +51,8 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
 ### Simulating Strategies (simulate_strategy.py)
  - Calculates various financial indicators, applies stock selection criteria, and evaluates the performance of a trading strategy.
 
+![Pipeline Snapshot](images/Pipeline_Snapshot.png)
+
 ## Usage
 1. Setup Environment:
    - Create a Vertex AI Workbench instance and a PostgreSQL database in Google Cloud SQL for MLflow, and Evidently AI.

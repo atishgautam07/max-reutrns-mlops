@@ -29,6 +29,12 @@ This repository contains an end-to-end MLOps pipeline designed to predict the to
     - compile_pipeline.py: Compiles all hte components of the pipeline. 
     - run_pipeline.py: Runs the final end-to-end pipeline.
 
+## Features
+1. Data Sources: Daily indexes, commodities, forex data using yfinance, FRED, TA-Lib, and pandas_datareader.
+2. Technical Indicators: Majority of momentum, volatility, and pattern indicators.
+3. Machine Learning Models: Random Forest and XGBoost models.
+4. Pipeline Stages: Data ingestion, transformation, model training, and evaluation.
+
 ## Pipeline Stages
 ### Data Ingestion (data_ingestion.py):
    The data_ingestion.py script ingests, processes, and saves financial data. Here's a compact overview of its functionality:
